@@ -64,7 +64,10 @@ def login():
         conn.close()
 
     if row:
-        return jsonify(message="Login successful. FLAG{sql_was_the_key}")
+        return jsonify(
+            message="Login successful.",
+            next="/puzzle6/terminal/"
+        )
     else:
         return jsonify(message="Authentication query returned 0 results.")
 
