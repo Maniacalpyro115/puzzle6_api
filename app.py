@@ -59,7 +59,6 @@ def login():
         cur.execute(query)
         row = cur.fetchone()
     except Exception as e:
-        # INTENTIONAL ERROR LEAK (clue)
         return jsonify(error=str(e)), 500
     finally:
         conn.close()
@@ -67,7 +66,8 @@ def login():
     if row:
         return jsonify(message="Login successful. FLAG{sql_was_the_key}")
     else:
-        return jsonify(message="Invalid credentials.")
+        return jsonify(message="Authentication query returned 0 results.")
+
 
 
 @app.route("/")
